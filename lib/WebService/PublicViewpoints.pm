@@ -31,11 +31,86 @@ WebService::PublicViewpoints - The Perl API to access the public-viewpoints geo-
 
   use WebService::PublicViewpoints;
 
-  my $points = WebService::PublicViewpoints->
+  my @points = WebService::PublicViewpoints->find(num => 10, country => "JP");
+
+  for (@points) {
+      say $->lat, $_->lng, $_->url;
+  }
 
 =head1 DESCRIPTION
 
-WebService::PublicViewpoints is
+WebService::PublicViewpoints is a Perl API to access the
+public-viewpoints geo-webservice available at
+L<http://public-viewpoints.appspot.com>. Each viewpoint is basically
+a camera shoting at something.
+
+To use it, invoke its `find` class method with constraints:
+
+    my @points = WebService::PublicViewpoints->find(num => 10, country => "JP");
+
+The possibile constraint key-values are:
+
+=over 4
+
+=item
+
+num: At least 1, the maximum number of results.
+
+=item
+
+random: "true" or "false".
+
+=item
+
+latitude, longitude: The viewpoints around this location are wanted.
+
+=item
+
+country_code: UK, US, JP, DE, FR.. etc.
+
+=item
+
+city: The city name, like "Miami".
+
+=back
+
+The find method returns a list of point objects, so you catch them in
+an array. Each point object has these attributes:
+
+=over 4
+
+=item
+
+url: The URL of camera image.
+
+=item
+
+country_code: UK, US, JP, DE, FR.. etc.
+
+=item
+
+country: The name of the associated country_code.
+
+=item
+
+state: The state abbrevation for US.
+
+=item
+
+city: The city name.
+
+=item
+
+lat: The latitude of this camera image.
+
+=item
+
+lng: The longitude of this camera image.
+
+=back
+
+The detail of the feasible contry/city values are unknown due to the
+lack of documentation of the origianl application site.
 
 =head1 AUTHOR
 
@@ -43,13 +118,16 @@ Kang-min Liu E<lt>gugod@gugod.orgE<gt>
 
 =head1 SEE ALSO
 
+L<http://public-viewpoints.appspot.com>
+
 =head1 LICENSE AND COPYRIGHT
 
 Copyright (c) 2009, Kang-min Liu C<< <gugod@gugod.org> >>.
 
 This is free software, licensed under:
 
-    The MIT (X11) License
+    Creative Common Attribution-Noncommercial-Share Alike 3.0 United States
+    http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 
 =head1 DISCLAIMER OF WARRANTY
 
