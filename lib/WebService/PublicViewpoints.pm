@@ -112,13 +112,11 @@ lng: The longitude of this camera image.
 The detail of the feasible contry/city values are unknown due to the
 lack of documentation of the origianl application site.
 
+This work is a based on the work of public-viewpoints service at L<http://public-viewpoints.appspot.com>
+
 =head1 AUTHOR
 
 Kang-min Liu E<lt>gugod@gugod.orgE<gt>
-
-=head1 SEE ALSO
-
-L<http://public-viewpoints.appspot.com>
 
 =head1 LICENSE AND COPYRIGHT
 
@@ -126,8 +124,7 @@ Copyright (c) 2009, Kang-min Liu C<< <gugod@gugod.org> >>.
 
 This is free software, licensed under:
 
-    Creative Common Attribution-Noncommercial-Share Alike 3.0 United States
-    http://creativecommons.org/licenses/by-nc-sa/3.0/us/
+    The MIT (X11) License
 
 =head1 DISCLAIMER OF WARRANTY
 
