@@ -11,17 +11,12 @@ use constant APP_URI => URI->new("http://public-viewpoints.appspot.com/get_viewp
 
 use LWP::Simple;
 use Text::CSV::Slurp;
-use 5.010;
 
 sub find {
     shift;
     my $uri = APP_URI->clone;
     $uri->query_form({@_, format => "csv"});
-    return [
-        map {
-            WebService::PublicViewpoints::Point->new(%$_)
-        } @{ Text::CSV::Slurp->load(string => "url,country_code,country,state,city,lat,lng,,\n" . get($uri)) }
-    ];
+    return map { WebService::PublicViewpoints::Point->new(%$_) } @{ Text::CSV::Slurp->load(string => "url,country_code,country,state,city,lat,lng,,\n" . get($uri)) }
 }
 
 1;
@@ -30,11 +25,13 @@ __END__
 
 =head1 NAME
 
-WebService::PublicViewpoints -
+WebService::PublicViewpoints - The Perl API to access the public-viewpoints geo-webservice.
 
 =head1 SYNOPSIS
 
   use WebService::PublicViewpoints;
+
+  my $points = WebService::PublicViewpoints->
 
 =head1 DESCRIPTION
 

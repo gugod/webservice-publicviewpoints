@@ -10,14 +10,18 @@ BEGIN {
 
 use WebService::PublicViewpoints;
 
-my $points = WebService::PublicViewpoints->find(num => 3, country_code => "US");
+my @points = WebService::PublicViewpoints->find(num => 3, country_code => "US");
 
-is(@$points, 3, "retrieved 3 points");
+ok( scalar(@points) <= 3, "retrieved at most 3 points");
 
-my $p = $points->[0];
+my $p = $points[0];
 
 foreach my $field (qw(url country_code country state city lat lng)) {
     ok defined $p->$field, "should define $field";
+}
+
+foreach (@points) {
+    is $_->country_code, "US", "The retrieved point are in US as specified"
 }
 
 done_testing;
